@@ -1,6 +1,6 @@
 # Helm Playground
 
-This repository contains the source code for https://helm-playground.com
+This repository contains the source code for helm playground. Forked from shipmight/helm-playground
 
 [![Screenshot of Helm Playground – Click to open](screenshot.png)](https://helm-playground.com)
 
