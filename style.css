@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
+
 * {
   box-sizing: inherit;
   margin: 0;
@@ -14,7 +16,7 @@
   --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-monospace: Menlo, Consolas, Monaco, Liberation Mono,
+  --font-family-monospace: "IBM Plex Mono", Menlo, Consolas, Monaco, Liberation Mono,
     Lucida Console, monospace;
 
   --font-weight-semibold: 500;
@@ -58,7 +60,7 @@
 }
 
 body {
-  font-family: var(--font-family-sans-serif);
+  font-family: "IBM Plex Mono", var(--font-family-sans-serif);
   font-size: 12px;
   line-height: 1.1;
 }
@@ -194,7 +196,7 @@ body {
 .CodeMirror.CodeMirror {
   background-color: var(--pre-bg);
   font-family: var(--font-family-monospace);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .CodeMirror-vscrollbar::-webkit-scrollbar,
@@ -281,6 +283,25 @@ body {
   background-color: var(--error-bg);
   color: var(--error-color);
   box-shadow: 0 2px 0 0 var(--error-border);
+}
+
+.toggle-invisibles {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  background: var(--start-bg);
+  color: var(--start-color);
+  padding: 8px 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 13px;
+  cursor: pointer;
+  z-index: calc(var(--z-index-above-codemirror) + 10);
+}
+
+.toggle-invisibles[aria-pressed='true'] {
+  background: #3e4451;
 }
 
 @media all and (max-width: 799px) {

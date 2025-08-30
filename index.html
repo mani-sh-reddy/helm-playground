@@ -15,17 +15,6 @@
   </head>
   <body>
     <div class="app app--playground">
-      <div class="top">
-        <a class="logo" href="/">Helm-playground.com</a>
-        <a class="top__link" href="/cheatsheet.html">Syntax cheatsheet</a>
-        <a class="top__link" href="/articles.html">Articles</a>
-        <a
-          style="margin-left: auto"
-          class="top__link hide-on-mobile"
-          href="mailto:martti@marttilaine.com"
-          >Your ad here? Reach 60k+ Helm users yearly</a
-        >
-      </div>
       <div class="content">
         <div class="column">
           <div class="label">template.yaml</div>
@@ -41,13 +30,6 @@
         </div>
         <div class="overlay">
           <p><button class="start">Start playground</button></p>
-          <p><strong>Debug Helm templates in your browser</strong></p>
-          <p class="overlay__dim">
-            A WebAssembly-file (2.3MB gzipped) will be downloaded and cached by
-            your browser. It includes Sprig, which Helm uses for templating.
-            Source on
-            <a href="https://github.com/shipmight/helm-playground">GitHub</a>.
-          </p>
         </div>
         <div class="floating-error" style="display: none"></div>
         <div class="floating-warning" style="display: none"></div>
@@ -104,7 +86,7 @@
       const codeMirrorOptions = {
         mode: "yaml",
         theme: "material",
-        showInvisibles: true,
+        showInvisibles: false,
 
         // Source: https://github.com/codemirror/codemirror5/issues/988#issuecomment-549644684
         tabSize: 2,
@@ -142,6 +124,35 @@
       templateTextarea.CodeMirror = templateCodeMirror;
       valuesTextarea.CodeMirror = valuesCodeMirror;
       outputTextarea.CodeMirror = outputCodeMirror;
+
+      // expose CodeMirror instances and helper to toggle invisibles
+      window._cmInstances = [templateCodeMirror, valuesCodeMirror, outputCodeMirror];
+      window.setShowInvisibles = (enabled) => {
+        for (const cm of window._cmInstances) {
+          try {
+            cm.setOption('showInvisibles', enabled);
+          } catch (e) {
+            // ignore if instance not ready
+          }
+        }
+        const btn = document.getElementById('toggle-invisibles');
+        if (btn) {
+          btn.textContent = enabled ? 'Hide invisibles' : 'Show invisibles';
+          btn.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+        }
+      };
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('toggle-invisibles');
+        if (!btn) return;
+        const initial = templateCodeMirror.getOption('showInvisibles');
+        btn.textContent = initial ? 'Hide invisibles' : 'Show invisibles';
+        btn.setAttribute('aria-pressed', initial ? 'true' : 'false');
+        btn.addEventListener('click', () => {
+          const current = templateCodeMirror.getOption('showInvisibles');
+          window.setShowInvisibles(!current);
+        });
+      });
 
       const overlay = document.querySelector(".overlay");
       const startButton = document.querySelector(".start");
@@ -239,6 +250,7 @@
           });
       });
     </script>
+    <button id="toggle-invisibles" class="toggle-invisibles" aria-pressed="false">Show invisibles</button>
     <script
       src="https://cdn.usefathom.com/script.js"
       data-site="ZNCHLJMX"

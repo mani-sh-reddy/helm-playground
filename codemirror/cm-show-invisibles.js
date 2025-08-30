@@ -93,7 +93,7 @@
         
         style.textContent = [
             getStyle(),
-            // getEOL(),
+            getEOL(),
             rules,
             gfmRules,
         ].join('\n');
