@@ -27,17 +27,17 @@
   --top-color: #e2e8f0;
   --top-bright: #f8fafc;
 
-  --label-bg: #475569;
-  --label-color: #f1f5f9;
+  --label-bg: #212632;
+  --label-color: #8591b0;
 
   --placeholder-color: #cbd5e1;
 
-  --overlay-bg: rgba(51, 65, 85, 0.8);
+  --overlay-bg: rgba(22, 25, 31, 0.8);
   --overlay-color: #e2e8f0;
   --overlay-dim: #cbd5e1;
 
-  --start-bg: #6366f1;
-  --start-shadow: #a5b4fc;
+  --start-bg: #3874bb;
+  --start-shadow: #3874bb;
   --start-color: #eef2ff;
 
   --error-bg: #ef4444;
@@ -51,12 +51,12 @@
   --content-bg: #1e293b;
   --content-color: #e2e8f0;
 
-  --pre-bg: #0f172a;
+  --pre-bg: #293142;
   --pre-color: #f1f5f9;
 
   --hr-color: rgb(105, 125, 158);
 
-  --ad-color: #94a3b8;
+  --ad-color: #384155;
 }
 
 body {
@@ -175,7 +175,7 @@ body {
 }
 
 .column:not(:first-of-type) {
-  border-left: 1px solid var(--label-bg);
+  border-left: 1px solid var(--ad-color);
 }
 
 .label {
@@ -183,6 +183,7 @@ body {
   color: var(--label-color);
   padding: 8px 16px;
   font-weight: var(--font-weight-semibold);
+  border-bottom: 1px solid var(--ad-color);
 }
 
 .textarea,
